@@ -13,7 +13,7 @@
 
                     <div class="text-center">
                         {% if obj.image == '/static/image/default.png' %}
-                    <img class="rounded-circle w-100" alt="img" src="{{ obj.image }}" >
+                    <img class="rounded-circle w-100" alt="img" src="{% static '/image/default.png' %}" >
                     <!-- <img src="{% static 'image/default.png' %}" alt="bb" class="w-25"> -->
 
                     {% else %}

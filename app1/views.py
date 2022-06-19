@@ -1,4 +1,5 @@
-
+from django.core.files.storage import FileSystemStorage
+from django.http import JsonResponse
 from django.shortcuts import redirect, render
 from .models import *
 import os
@@ -13,6 +14,7 @@ def index(request):
         'obj': obj
     }
     return render(request, 'index.html', context)
+
 
 @csrf_exempt
 def create_contact(request):
@@ -34,11 +36,21 @@ def create_contact(request):
     return render(request, 'create_contact.html')
 
 
-def view_contact(request, pk):
-
-    print(pk)
+@csrf_exempt
+def view_contact(request):
+    pk = request.POST.get('pid')
     cmdl = PhoneBookModel.objects.get(id=pk)
-    return render(request, 'view_contact.html', {'obj': cmdl})
+    n=str(cmdl.image)
+    fss = FileSystemStorage()
+    url = fss.url(cmdl.image)
+    view_person = {
+        "name": cmdl.name,
+        "mobile": cmdl.mobile,
+        "image": url,
+
+    }
+    # return render(request, 'view_contact.html', {'obj': cmdl})
+    return JsonResponse(view_person)
 
 
 def edit_contact(request, pk):
@@ -58,7 +70,7 @@ def edit_contact(request, pk):
 
 def contact_delete(request, pk):
     var = PhoneBookModel.objects.get(id=pk)
-    print('pop')
+   
     if var.image is not None:
         if not var.image == "/static/image/default.png":
             os.remove(var.image.path)

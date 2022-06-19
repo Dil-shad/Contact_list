@@ -7,7 +7,7 @@ from .views import *
 urlpatterns = [
     path('', index, name='index'),
     path('create_contact', create_contact, name='create_contact'),
-    path('view_contact/<int:pk>', view_contact, name='view_contact'),
+    path('view_contact', view_contact, name='view_contact'),
     path('edit_contact/<int:pk>', edit_contact, name='edit_contact'),
     path('contact_delete/<int:pk>', contact_delete, name='contact_delete'),
 

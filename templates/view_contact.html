@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block body %}
+{% load static %}
+
+<div class="conatiner p-5">
+    <div class="row">
+        <div class="col-4"></div>
+        <div class="col-sm-12 col-md-4">
+            <div class="text-center bg-light">
+                <div class="text-center mb-3">
+                    {% if obj.image == '/static/image/default.png' %}
+                    <img class="rounded-circle w-100" alt="img" src="{{ obj.image }}">
+                    <!-- <img src="{% static 'image/default.png' %}" alt="bb" class="w-25"> -->
+
+                    {% else %}
+
+                    <!-- <img src="{{ obj.image.url }}" class="w-25" alt="aa"> -->
+                    <img class="rounded-circle w-100" alt="img" src="{{ obj.image.url }}">
+
+                    {% endif %}
+                </div>
+
+                <p><strong>{{obj.name}}</strong></p>
+                <p>{{obj.mobile}}</p>
+            </div>
+
+        </div>
+        <div class="col-4"></div>
+    </div>
+</div>
+
+{% endblock body %}

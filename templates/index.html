@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block body %}
+<div class="container">
+    <div class="row">
+        <div class="col-3"></div>
+        <div class="col-sm-12 col-md-6 ">
+            <table class="table table-striped">
+                <h3 class="text-center fw-bold mt-3">Contacts</h3>
+                <thead>
+                    <tr>
+                        <th class="px-3">ID</th>
+                        <th>Name</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for i in obj %}
+
+                    <tr>
+                        <td class="px-4">{{i.id}}</td>
+                        <td><a href="{% url 'view_contact' i.id %}" data-bs-toggle="tooltip"
+                                title="View Details!">{{i.name}}</a></td>
+                        <td><a class="" href="{% url 'edit_contact' i.id %}">Edit</a>
+                            <br>
+                            <a class="text-danger" onclick="ConfirmDelete()" id="clr"
+                                href="{% url 'contact_delete' i.id %}">Delete</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="col-3"></div>
+    </div>
+</div>
+<style>
+    a {
+        text-decoration: none;
+    }
+</style>
+<script>
+    function ConfirmDelete() {
+        return confirm("Are you sure you want to delete?");
+    }
+
+</script>
+{% endblock body %}

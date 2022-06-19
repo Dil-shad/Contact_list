@@ -33,10 +33,7 @@
           </li>
 
         </ul>
-        <form class="d-flex">
-          <input id="qu" class="form-control me-2" name="qu" type="text" placeholder="Search Contacts">
-          <button class="btn btn-primary" type="submit">Search</button>
-        </form>
+       
       </div>
     </div>
   </nav>
@@ -45,18 +42,6 @@
 
   {% endblock body %}
 </body>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-<script>
-  $(document).ready(function () {
-    console.log('fuction called')
-    $("#qu").autocomplete({
-      source: '{% url "autofill" %}',
-      minLenght: 2
-    });
-  });
 
-</script>
 
 </html>

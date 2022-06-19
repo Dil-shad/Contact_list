@@ -10,6 +10,8 @@ urlpatterns = [
     path('view_contact', view_contact, name='view_contact'),
     path('edit_contact/<int:pk>', edit_contact, name='edit_contact'),
     path('contact_delete/<int:pk>', contact_delete, name='contact_delete'),
+    path('autofill',autofill,name='autofill'),
+    
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

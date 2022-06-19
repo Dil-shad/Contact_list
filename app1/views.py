@@ -8,12 +8,25 @@ from django.views.decorators.csrf import csrf_exempt
 
 
 def index(request):
-
-    obj = PhoneBookModel.objects.all()
+    if 'qu' in request.GET:
+        qu = request.GET['qu']
+        obj = PhoneBookModel.objects.filter(name__icontains=qu)
+    else:
+        obj = PhoneBookModel.objects.all()
     context = {
         'obj': obj
     }
     return render(request, 'index.html', context)
+
+
+def autofill(request):
+    if 'term' in request.GET:
+        q = request.GET.get('term')
+        obj = PhoneBookModel.objects.filter(name__istartswith=q)
+        auto = []
+        for i in obj:
+            auto.append(i.name)
+        return JsonResponse(auto, safe=False)
 
 
 @csrf_exempt
@@ -40,7 +53,7 @@ def create_contact(request):
 def view_contact(request):
     pk = request.POST.get('pid')
     cmdl = PhoneBookModel.objects.get(id=pk)
-    n=str(cmdl.image)
+    n = str(cmdl.image)
     fss = FileSystemStorage()
     url = fss.url(cmdl.image)
     view_person = {
@@ -70,7 +83,7 @@ def edit_contact(request, pk):
 
 def contact_delete(request, pk):
     var = PhoneBookModel.objects.get(id=pk)
-   
+
     if var.image is not None:
         if not var.image == "/static/image/default.png":
             os.remove(var.image.path)
